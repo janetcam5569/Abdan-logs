@@ -1,0 +1,188 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Abdan | Smart Food Logistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Abdan</h1>
+    <p>Smart • Fast • Reliable Food Logistics</p>
+    <button onclick="openWhatsApp()">Chat on WhatsApp</button>
+</header>
+
+<section class="hero">
+    <h2>Move Food Smarter 🚚</h2>
+    <p>Track deliveries, assign riders, and deliver faster.</p>
+</section>
+
+<section class="order">
+    <h2>Place an Order</h2>
+
+    <div class="order-options">
+        <button onclick="selectType('Restaurant')">Restaurant</button>
+        <button onclick="selectType('Market')">Market</button>
+        <button onclick="selectType('Bulk Supply')">Bulk Supply</button>
+    </div>
+
+    <form onsubmit="placeOrder(event)">
+        <input type="text" placeholder="Your Name" required>
+        <input type="text" placeholder="Pickup Location" required>
+        <input type="text" placeholder="Delivery Location" required>
+        <input type="tel" placeholder="Phone Number" required>
+
+        <button class="primary">Submit Order</button>
+    </form>
+</section>
+
+<section class="tracking">
+    <h2>Live Order Tracking</h2>
+    <p id="status">No active order</p>
+    <progress id="progress" value="0" max="100"></progress>
+</section>
+
+<section class="map">
+    <h2>Rider Location</h2>
+    <div id="map">Map will appear here</div>
+</section>
+
+<footer>
+    <p>© 2026 Abdan Logistics</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html><style>body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #fdfbfb, #ebedee);
+    color: #333;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #ff6a00, #8e2de2);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background: #25D366;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Sections */
+section {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.hero h2 {
+    color: #8e2de2;
+}
+
+/* Order */
+.order-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.order-options button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    background: #00bfa5;
+    color: white;
+    cursor: pointer;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.primary {
+    background: #ff6a00;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* Tracking */
+.tracking progress {
+    width: 100%;
+    height: 20px;
+}
+
+/* Map */
+#map {
+    height: 300px;
+    background: #ccc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}</style><script>let orderType = "";
+
+function selectType(type) {
+    orderType = type;
+    alert("Order type selected: " + type);
+}
+
+function openWhatsApp() {
+    window.open("https://wa.me/2348012345678?text=Hello%20Abdan,%20I%20want%20to%20place%20an%20order");
+}
+
+function placeOrder(event) {
+    event.preventDefault();
+    startTracking();
+}
+
+function startTracking() {
+    let progress = document.getElementById("progress");
+    let status = document.getElementById("status");
+    let value = 0;
+
+    status.innerText = "Order confirmed 🚀";
+
+    let interval = setInterval(() => {
+        value += 10;
+        progress.value = value;
+
+        if (value === 50) status.innerText = "Rider en route 🏍️";
+        if (value === 80) status.innerText = "Almost delivered 📦";
+
+        if (value >= 100) {
+            status.innerText = "Delivered ✅";
+            clearInterval(interval);
+        }
+    }, 1000);
+}</script>
